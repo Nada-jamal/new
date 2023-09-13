@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:untitled10/Home%20Screen.dart';
+import 'package:untitled10/My_them.dart';
+import 'package:untitled10/home/Home%20Screen.dart';
 
 void main() {
   runApp(MYApp());
@@ -14,6 +15,7 @@ class MYApp extends StatelessWidget {
         HomeScreen.routeName: (context) => HomeScreen(),
       },
       debugShowCheckedModeBanner: false,
+      theme: MyTheme.lightMode,
     );
   }
 }
