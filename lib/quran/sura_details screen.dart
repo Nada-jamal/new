@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:untitled10/My_them.dart';
+import 'package:untitled10/providers/app_config_provider.dart';
 import 'package:untitled10/quran/iteam%20suraDetails.dart';
 
 class suraDetailsScreen extends StatefulWidget {
@@ -16,13 +18,21 @@ class _suraDetailsScreenState extends State<suraDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)?.settings.arguments as suraDetailsArgs;
+    var provider = Provider.of<AppConfigProvider>(context);
     if (verses.isEmpty) {
       loadFile(args.index);
     }
     return Stack(
       children: [
-        Image.asset('assets/image/main_background.png',
-            width: double.infinity, height: double.infinity, fit: BoxFit.fill),
+        provider.isDarkMode()
+            ? Image.asset('assets/image/main_background_dark.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill)
+            : Image.asset('assets/image/main_background.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill),
         Scaffold(
           appBar: AppBar(
             title: Text(
@@ -39,7 +49,9 @@ class _suraDetailsScreenState extends State<suraDetailsScreen> {
                   ),
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                      color: MyTheme.whiteColor,
+                      color: provider.isDarkMode()
+                          ? MyTheme.primaryDark
+                          : MyTheme.whiteColor,
                       borderRadius: BorderRadius.circular(20)),
                   child: ListView.builder(
                     itemBuilder: ((context, index) {
